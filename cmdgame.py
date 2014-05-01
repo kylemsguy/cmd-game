@@ -25,6 +25,9 @@ class Player:
 
     def inc_score(self, value=1):
         self._score += value
+
+    def __str__(self):
+        return self.get_name()
         
 
 def maingame():
@@ -69,6 +72,9 @@ def maingame():
     err = False
     
     while not game_done:
+        if len(letter_blacklist) == 26 or len(used_commands) >= GAME_LIMIT:
+            break # end game
+
         if not err:
             # score standings
             print("\nThis is how the scores stand:")
@@ -84,8 +90,6 @@ def maingame():
         # shuffle players
         shuffle(player_indices)
         
-        if len(letter_blacklist) == 26 or len(used_commands) >= GAME_LIMIT:
-            break # end game
         start_letter_index = randint(0, 25)
         if start_letter_index == last_start_letter:
             err = True
@@ -138,7 +142,7 @@ def maingame():
     max_score = 0
     for player in players:
         if player.get_score() > max_score:
-            max_player = [player]
+            max_players = [player]
             max_score = player.get_score()
         elif player.get_score() == max_score > 0:
             max_players.append(player)
@@ -146,11 +150,11 @@ def maingame():
             continue
 
     if len(max_players) > 1:
-        print("The winners are ")
+        print("\nThe winners are ")
         for player in max_players:
-            print(player.getname(), sep="\t")
+            print(player.get_name(), sep="\t")
     else:
-        print("The winner is", max_players[0])
+        print("\nThe winner is", max_players[0].get_name())
 
 if __name__ == "__main__":
     maingame()
