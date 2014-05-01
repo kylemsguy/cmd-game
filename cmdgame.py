@@ -57,6 +57,8 @@ def maingame():
                 setup_done = True
                 # Player set up now done
 
+    player_indices = list(range(len(players)))
+    
     #now generate list of commands
     cmd_list = os.listdir("/bin") + os.listdir("/sbin")
     cmd_list = cmd_list + os.listdir("/usr/bin") + os.listdir("/usr/sbin")
@@ -78,8 +80,8 @@ def maingame():
         else:
             err = False
 
-        # shuffle players (still needs to be better implemented)
-        #shuffle(players)
+        # shuffle players
+        shuffle(player_indices)
         
         if len(letter_blacklist) == 26 or len(used_commands) >= GAME_LIMIT:
             break # end game
@@ -104,7 +106,8 @@ def maingame():
             err = True
             continue
         else:
-            for player in players:
+            for index in player_indices:
+                player = players[index]
                 print("The letter is", start_letter)
                 print("Player ", player.get_index(), "'s turn.", sep="")
                 print(player.get_name(), "please enter your guess: ", end="")
