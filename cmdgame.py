@@ -6,7 +6,7 @@ from random import randint, shuffle
 alphabet = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
 
-GAME_LIMIT = 15
+GAME_LIMIT = 3
 
 class Player:
     def __init__(self, index, name):
@@ -131,7 +131,7 @@ def maingame():
                     break
                     
     # game end stuff
-    print("The scores are:")
+    print("\nThe scores are:")
     for player in players:
         print(player.get_name(), end="\t")
     print()
@@ -150,11 +150,11 @@ def maingame():
             continue
 
     if len(max_players) > 1:
-        print("\nThe winners are ")
+        print("\n\nThe winners are ")
         for player in max_players:
             print(player.get_name(), sep="\t")
     else:
-        print("\nThe winner is", max_players[0].get_name())
+        print("\n\nThe winner is", max_players[0].get_name())
 
 if __name__ == "__main__":
     maingame()
