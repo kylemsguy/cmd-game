@@ -6,7 +6,7 @@ from random import randint, shuffle
 alphabet = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
 
-GAME_LIMIT = 3
+GAME_LIMIT = 15
 
 class Player:
     def __init__(self, index, name):
