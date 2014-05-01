@@ -62,6 +62,7 @@ def maingame():
     #now generate list of commands
     cmd_list = os.listdir("/bin") + os.listdir("/sbin")
     cmd_list = cmd_list + os.listdir("/usr/bin") + os.listdir("/usr/sbin")
+    cmd_list = list(set(cmd_list))
 
     start_letter_index = -1
     last_start_letter = 0
