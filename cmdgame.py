@@ -90,7 +90,8 @@ def maingame():
                 print(player.get_name(), "please enter your guess: ", end="")
                 guess = input()
                 if guess in used_commands:
-                    print("Command used already. You lose your turn.")
+                    print("Command used already. You lose a point.")
+                    player.inc_score(-1)
                     continue
                 elif not guess in cmd_list:
                     print("Not a valid command. You lose your turn.")
