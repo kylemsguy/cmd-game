@@ -36,24 +36,8 @@ def get_commands(force=False):
     cmd_list = cmd_list + os.listdir("/usr/bin") + os.listdir("/usr/sbin")
     return list(set(cmd_list))
 
-def maingame():
-    game_done = False
-    setup_done = False
-    used_commands = []
-    letter_blacklist = []
-    players = []
-
-    #generate list of commands
-    try:
-        cmd_list = get_commands()
-    except OSError:
-        print("OS not supported. Continue? [Y/n] ", end="")
-        go = input()
-        if go == "n":
-            return # end the game now.
-        else:
-            cmd_list = get_commands(True)
-
+def setup_players():
+   setup_done = False
     while not setup_done:
         num_players = input("How many players?: ")
         try:
@@ -75,14 +59,36 @@ def maingame():
                     players.append(new_player)
 
                 setup_done = True
-                # Player set up now done
+    return players[:] #return the player list (deep copy)
 
-    player_indices = list(range(len(players)))
+def maingame():
+    game_done = False
+    used_commands = []
+    letter_blacklist = []
+    players = []
+
+    #generate list of commands
+    try:
+        cmd_list = get_commands()
+    except OSError:
+        print("OS not supported. Continue? [Y/n] ", end="")
+        go = input()
+        if go == "n":
+            return # end the game now.
+        else:
+            cmd_list = get_commands(True)
+
+    # get number of players and make player objects
+    players = get_players()
+
+    # randomize the list of players
+    player_indices = list(range(len(players))) # get a list of indices
     
     start_letter_index = -1
     last_start_letter = 0
     err = False
-    
+
+    # main game loop
     while not game_done:
         if len(letter_blacklist) == 26 or len(used_commands) >= GAME_LIMIT:
             break # end game
