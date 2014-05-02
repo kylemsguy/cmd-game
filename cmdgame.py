@@ -28,7 +28,13 @@ class Player:
 
     def __str__(self):
         return self.get_name()
-        
+
+def get_commands(force=False):
+    if os.name != "posix" and not force:
+        raise OSError
+    cmd_list = os.listdir("/bin") + os.listdir("/sbin")
+    cmd_list = cmd_list + os.listdir("/usr/bin") + os.listdir("/usr/sbin")
+    return list(set(cmd_list))
 
 def maingame():
     game_done = False
@@ -36,6 +42,17 @@ def maingame():
     used_commands = []
     letter_blacklist = []
     players = []
+
+    #generate list of commands
+    try:
+        cmd_list = get_commands()
+    except OSError:
+        print("OS not supported. Continue? [Y/n] ", end="")
+        go = input()
+        if go == "n":
+            return # end the game now.
+        else:
+            cmd_list = get_commands(True)
 
     while not setup_done:
         num_players = input("How many players?: ")
@@ -62,11 +79,6 @@ def maingame():
 
     player_indices = list(range(len(players)))
     
-    #now generate list of commands
-    cmd_list = os.listdir("/bin") + os.listdir("/sbin")
-    cmd_list = cmd_list + os.listdir("/usr/bin") + os.listdir("/usr/sbin")
-    cmd_list = list(set(cmd_list))
-
     start_letter_index = -1
     last_start_letter = 0
     err = False
