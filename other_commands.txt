@@ -1,0 +1,5 @@
+# in this file you may put commands or directories that should be 
+# included or excluded from the program. 
++cd # means add the cd command to the command list
+#-/sbin # means remove everything from the /sbin folder
+

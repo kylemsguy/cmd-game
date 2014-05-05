@@ -29,6 +29,15 @@ class Player:
     def __str__(self):
         return self.get_name()
 
+def get_other_commands(cmd_filename="other_commands.txt"):
+    comment_pat = re.compile('#')
+    add_pat = re.compile('+')
+    remove_pat = re.compile('-')
+
+    cmd_file = open(cmd_filename, 'r')
+
+    
+
 def get_commands(force=False):
     if os.name != "posix" and not force:
         raise OSError
