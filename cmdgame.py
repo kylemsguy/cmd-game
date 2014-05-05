@@ -37,6 +37,7 @@ def get_commands(force=False):
     return list(set(cmd_list))
 
 def setup_players():
+    players = []
     setup_done = False
     while not setup_done:
         num_players = input("How many players?: ")
