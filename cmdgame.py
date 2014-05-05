@@ -79,7 +79,7 @@ def maingame():
             cmd_list = get_commands(True)
 
     # get number of players and make player objects
-    players = get_players()
+    players = setup_players()
 
     # randomize the list of players
     player_indices = list(range(len(players))) # get a list of indices
